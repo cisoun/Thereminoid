@@ -10,14 +10,16 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/TMTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.hearc.thereminoid.activities.MainActivity"
+            android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:theme="@style/TMTheme">
+            android:theme="@style/TMTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

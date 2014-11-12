@@ -13,7 +13,7 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="TMTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="TMTheme" parent="@android:style/Theme.Holo">
         <item name="android:actionBarStyle">@style/TMTheme.ActionBarStyle</item>
     </style>
 
