@@ -2,12 +2,14 @@
 <resources>
 
     <string name="app_name">Thereminoid</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="action_record">Record</string>
     <string name="action_mute">Mute</string>
-    <string name="action_list">List</string>
+    <string name="action_list">My records</string>
     <string name="action_wave_sin">Sinus</string>
 	<string name="action_wave_sqr">Square</string>
 	<string name="action_wave_saw">Saw</string>
+	<string name="action_dropdown">More</string>
+	<string name="action_orientation">Change orientation</string>
+	<string name="action_settings">Settings</string>
+	<string name="action_about">About Thereminoid</string>
 </resources>

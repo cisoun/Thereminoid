@@ -4,37 +4,76 @@
 
     <item
         android:id="@+id/action_record"
-        android:icon="@drawable/record"
+        android:icon="@drawable/ic_action_record"
         android:showAsAction="always"
         android:title="@string/action_record"/>
-	
     <item
         android:id="@+id/action_mute"
         android:icon="@drawable/ic_action_unmute"
         android:showAsAction="always"
         android:title="@string/action_mute"/>
-    
     <item
         android:id="@+id/action_list"
         android:icon="@drawable/ic_action_list"
         android:showAsAction="always"
         android:title="@string/action_list"/>
-    
     <item
         android:id="@+id/action_wave_sin"
         android:icon="@drawable/ic_action_wave_sin"
         android:showAsAction="always"
         android:title="@string/action_wave_sin"/>
-    
     <item
         android:id="@+id/action_wave_sqr"
         android:icon="@drawable/ic_action_wave_sqr"
         android:showAsAction="always"
         android:title="@string/action_wave_sqr"/>
-    
     <item
         android:id="@+id/action_wave_saw"
         android:icon="@drawable/ic_action_wave_saw"
         android:showAsAction="always"
         android:title="@string/action_wave_saw"/>
+    <!--
+    <item
+        android:id="@+id/action_orientation"
+        android:icon="@drawable/ic_action_orientation"
+        android:showAsAction="never"
+        android:title="@string/action_orientation"/>
+    
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_action_settings"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_action_about"
+        android:showAsAction="never"
+        android:title="@string/action_about"/>
+    -->
+
+    <item
+        android:id="@+id/mainMenu"
+        android:icon="@drawable/ic_action_dropdown"
+        android:showAsAction="always"
+        android:title="@string/action_dropdown">
+        <menu>
+            <item
+                android:id="@+id/action_orientation"
+                android:icon="@drawable/ic_action_orientation"
+                android:showAsAction="never"
+                android:title="@string/action_orientation"/>
+            <item
+                android:id="@+id/action_settings"
+                android:icon="@drawable/ic_action_settings"
+                android:showAsAction="never"
+                android:title="@string/action_settings"/>
+            <item
+                android:id="@+id/action_about"
+                android:icon="@drawable/ic_action_about"
+                android:showAsAction="never"
+                android:title="@string/action_about"/>
+        </menu>
+    </item>
+
 </menu>
