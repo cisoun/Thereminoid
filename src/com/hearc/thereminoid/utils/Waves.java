@@ -1,13 +1,13 @@
 package com.hearc.thereminoid.utils;
 
 public class Waves {
-	public static float[] makeSinus(float hertz, int samples, float amplitude) {
+	public static float[] makeSinus(float frequency, int samples, float amplitude) {
 		float[] sinus;
 		double degrees = 0.0;
 		double delta;
 		double max;
 
-		max = hertz * 360;
+		max = frequency * 360;
 
 		if (samples > max)
 			samples = (int) max;
@@ -23,19 +23,28 @@ public class Waves {
 		return sinus;
 	}
 
-	public static float[] makeSquare(float hertz, int samples, float amplitude) {
+	public static float[] makeSquare(float frequency, int samples, float amplitude) {
 		float[] square = new float[samples];
 		int direction = -1;
-		int samplesPerPeak = samples / (int) hertz / 2;
+		int samplesPerPeak = (int) (samples / frequency); //samples / (int) frequency / 2;
 		System.out.println(samplesPerPeak + " - " + samples);
-		
-		square[0] = 0;
-		for (int i = 1; i < samples; i++) {
-			square[i] = amplitude * direction;
+
+		/*
+		 * square[0] = 0; for (int i = 1; i < samples; i++) { square[i] =
+		 * amplitude * direction; if (i % samplesPerPeak == 0) direction =
+		 * direction * -1; }
+		 */
+
+		for (int i = 0; i < samples; i++) {
 			if (i % samplesPerPeak == 0)
-				direction = direction * -1;
+				direction *= -1;
+			square[i] = (float)direction * amplitude;
 		}
 
 		return square;
 	}
+
+	/*public static float[] makeSaw(float frequency, int samples, float amplitude) {
+		
+	}*/
 }
