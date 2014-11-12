@@ -2,6 +2,8 @@ package com.hearc.thereminoid.views;
 
 import java.util.Random;
 
+import com.hearc.thereminoid.utils.Waves;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -80,10 +82,8 @@ public class VisualizerView extends View implements Runnable {
 		y = getHeight() / 2;
 		
 		input = null;
-		input = new float[w];
-		for (int i = 0; i < input.length; i++) {
-			input[i] = (float) Math.sin((double) i / 40) * 0.5f;
-		}
+		input = Waves.makeSquare(10.0f, w, 0.5f);
+		//input = Waves.makeSinus(5, w, 0.5f);
 	}
 
 	private void drawSignal(Canvas canvas, float[] signal) {
@@ -141,4 +141,9 @@ public class VisualizerView extends View implements Runnable {
 		invalidate();
 	}
 
+	public void makeWave(float[] wave)
+	{
+		input = null;
+		input = wave;
+	}
 }
