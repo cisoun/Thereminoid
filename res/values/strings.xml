@@ -6,10 +6,19 @@
     <string name="action_mute">Mute</string>
     <string name="action_list">My records</string>
     <string name="action_wave_sin">Sinus</string>
-	<string name="action_wave_sqr">Square</string>
-	<string name="action_wave_saw">Saw</string>
-	<string name="action_dropdown">More</string>
-	<string name="action_orientation">Change orientation</string>
-	<string name="action_settings">Settings</string>
-	<string name="action_about">About Thereminoid</string>
+    <string name="action_wave_sqr">Square</string>
+    <string name="action_wave_saw">Saw</string>
+    <string name="action_dropdown">More</string>
+    <string name="action_orientation">Change orientation</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About Thereminoid</string>
+    <string name="title_activity_about">About Thereminoid</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="about_subtitle">Thereminoid was made by</string>
+    <string name="about_developers">
+        Cyriaque Skrapits\n
+        Eddy Strambini
+    </string>
+
 </resources>
