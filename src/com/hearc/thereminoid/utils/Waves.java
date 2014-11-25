@@ -7,7 +7,7 @@ public class Waves {
 		double delta;
 		double max;
 
-		max = frequency * 360;
+		max = frequency * 360.0;
 
 		if (samples > max)
 			samples = (int) max;
@@ -26,14 +26,7 @@ public class Waves {
 	public static float[] makeSquare(float frequency, int samples, float amplitude) {
 		float[] square = new float[samples];
 		int direction = -1;
-		int samplesPerPeak = (int) (samples / frequency); //samples / (int) frequency / 2;
-		System.out.println(samplesPerPeak + " - " + samples);
-
-		/*
-		 * square[0] = 0; for (int i = 1; i < samples; i++) { square[i] =
-		 * amplitude * direction; if (i % samplesPerPeak == 0) direction =
-		 * direction * -1; }
-		 */
+		int samplesPerPeak = (int) (samples / frequency) / 2 + 1;
 
 		for (int i = 0; i < samples; i++) {
 			if (i % samplesPerPeak == 0)
@@ -44,7 +37,17 @@ public class Waves {
 		return square;
 	}
 
-	/*public static float[] makeSaw(float frequency, int samples, float amplitude) {
+	public static float[] makeSaw(float frequency, int samples, float amplitude) {
+		float[] saw = new float[samples];
+		float samplesPerFrequence = samples / frequency;
+		float offset = samplesPerFrequence / 2;
 		
-	}*/
+		float delta = amplitude * 2.0f / samplesPerFrequence;
+		
+		for (int i = 0; i < samples; i++) {
+			saw[i] = -amplitude + (((float)i + offset) % samplesPerFrequence) * delta; //((float)i + offset % samplesPerFrequence);
+		}
+		
+		return saw;
+	}
 }

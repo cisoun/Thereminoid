@@ -98,8 +98,8 @@ public class VisualizerView extends View implements Runnable {
 
 		// Draw the line
 		for (int i = 1; i < signal.length; i++) {
-			ya = y + signal[i - 1] * y;
-			yb = y + signal[i] * y;
+			ya = y - signal[i - 1] * y;
+			yb = y - signal[i] * y;
 
 			canvas.drawLine(i - 1, ya, i, yb, paintSignal);
 
@@ -117,8 +117,8 @@ public class VisualizerView extends View implements Runnable {
 		paintParticles.setColor(Color.HSVToColor(hsv));
 		
 		for (int i = 1; i < signal.length; i++) {
-			ya = y + signal[i - 1] * y;
-			yb = y + signal[i] * y;
+			ya = y - signal[i - 1] * y;
+			yb = y - signal[i] * y;
 
 
 			// Draw particles
