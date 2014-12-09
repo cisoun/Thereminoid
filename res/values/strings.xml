@@ -14,11 +14,9 @@
     <string name="action_about">About Thereminoid</string>
     <string name="title_activity_about">About Thereminoid</string>
     <string name="hello_world">Hello world!</string>
-    
     <string name="about_subtitle">Thereminoid was made by</string>
-    <string name="about_developers">
-        Cyriaque Skrapits\n
-        Eddy Strambini
-    </string>
+    <string name="about_developers">        Cyriaque Skrapits\n
+        Eddy Strambini</string>
+    <string name="title_activity_test_sensors">TestSensorsActivity</string>
 
 </resources>
