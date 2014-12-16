@@ -1,12 +1,12 @@
 package com.hearc.thereminoid;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.provider.Telephony.Sms.Conversations;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +15,12 @@ import android.widget.TextView;
 public class TestSensorsActivity extends Activity implements SensorEventListener{
 
 	private SensorManager mSensorManager;
-	private Sensor proximity;
+	private Sensor light;
 	private Sensor magnetic;
-	private TextView viewForce,viewProximity;
+	private TextView viewForce,viewForceFirstValue,viewLight,viewLightFirstValue;
+	private View layout;
+	private float calibrateForce = 0;
+	private float calibrateLight = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +29,19 @@ public class TestSensorsActivity extends Activity implements SensorEventListener
 
 		mSensorManager = (SensorManager)this.getSystemService(SENSOR_SERVICE);
 		magnetic = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		proximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+		light = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 		
-		mSensorManager.registerListener(this, magnetic, SensorManager.SENSOR_DELAY_NORMAL);
-		mSensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, magnetic, SensorManager.SENSOR_DELAY_FASTEST);
+		mSensorManager.registerListener(this, light, SensorManager.SENSOR_DELAY_UI);
 		
 		
 		viewForce = (TextView)findViewById(R.id.textViewForce);
-		viewProximity = (TextView)findViewById(R.id.TextViewProximity);
+		viewForceFirstValue = (TextView)findViewById(R.id.textViewForceFirstValue);
+		
+		viewLight = (TextView)findViewById(R.id.TextViewProximity);
+		viewLightFirstValue = (TextView)findViewById(R.id.textViewProximityFirstValue);
+		
+		layout = findViewById(R.id.layout);
 
 	}
 	
@@ -62,21 +70,58 @@ public class TestSensorsActivity extends Activity implements SensorEventListener
 		float x,y,z;
 		
 		if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-		    x = event.values[0];
+
+			x = event.values[0];
 		    y = event.values[1];
 		    z = event.values[2];
 		    
 		    float force = (float) Math.sqrt( (x*x) + (y*y) + (z*z) );
-		
 		    
-		    viewForce.setText(String.valueOf(force));
+		    if(calibrateForce == 0)
+		    {
+		    	calibrateForce = force;
+		    	viewForceFirstValue.setText(String.valueOf(calibrateForce));
+		    }
+		    
+		    int value = getCalibrateValues(force,true);
+		    viewForce.setText(String.valueOf(value));
 		}
-		if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+		if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
 			x = event.values[0];
 			
-			viewProximity.setText(String.valueOf(x));
+		    if(calibrateLight == 0)
+		    {
+		    	calibrateLight = x;
+		    	viewLightFirstValue.setText(String.valueOf(calibrateLight));
+		    }
+			
+			viewLight.setText(String.valueOf(getCalibrateValues(x,false)));
+		}		
+	}
+	
+	private int getCalibrateValues(float sensorValue,boolean bool)
+	{
+		// If bool = 1 -> magnetic sensor
+		if(bool)
+		{
+			int value = (int) (103-(sensorValue/calibrateForce)*3.5);
+			
+			if(value > 100)
+				return 100;
+			if(value <= 0)
+				return 0;
+			else
+				return value;
 		}
-		
+		else
+		{
+			int value = (int) ((sensorValue/calibrateLight)*100);
+			
+			if(value > 100)
+				return 100;
+			else
+				return value;
+		}
 	}
 	
 	@Override
