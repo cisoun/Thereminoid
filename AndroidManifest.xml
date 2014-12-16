@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/TMTheme" >
         <activity
-            android:name="com.hearc.thereminoid.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
@@ -25,6 +25,25 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hearc.thereminoid.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hearc.thereminoid.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.hearc.thereminoid.activities.RecordsActivity"
+            android:label="@string/records" >
         </activity>
     </application>
 

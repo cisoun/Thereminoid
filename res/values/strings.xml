@@ -6,10 +6,34 @@
     <string name="action_mute">Mute</string>
     <string name="action_list">My records</string>
     <string name="action_wave_sin">Sinus</string>
-	<string name="action_wave_sqr">Square</string>
-	<string name="action_wave_saw">Saw</string>
-	<string name="action_dropdown">More</string>
-	<string name="action_orientation">Change orientation</string>
-	<string name="action_settings">Settings</string>
-	<string name="action_about">About Thereminoid</string>
+    <string name="action_wave_sqr">Square</string>
+    <string name="action_wave_saw">Saw</string>
+    <string name="action_dropdown">More</string>
+    <string name="action_orientation">Change orientation</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About Thereminoid</string>
+    <string name="title_activity_about">About Thereminoid</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="about_subtitle">Thereminoid was made by</string>
+    <string name="about_developers">
+        Cyriaque Skrapits\n
+        Eddy Strambini
+	</string>
+        
+    <string name="records">My records</string>
+
+    <string name="prefs_animations">Animations</string>
+    <string name="prefs_animations_enable">Enable animations</string>
+    <string name="prefs_animations_enable_summary">Enable animations in the waveform</string>
+    <string name="prefs_animations_particles">Enable particles</string>
+    <string name="prefs_animations_particles_summary">Show a particles animation in the waveform</string>
+    <string name="prefs_animations_hue">Enable color animation</string>
+    <string name="prefs_animations_hue_summary">Allow animation to change its color</string>
+    <string name="prefs_sensors">Sensors</string>
+    <string name="prefs_sensors_luminosity">Use luminosity sensor</string>
+    <string name="prefs_sensors_luminosity_summary">
+        Use the luminosity sensors instead of the proximity sensor. This may work better on some devices.
+    </string>
+   
 </resources>
