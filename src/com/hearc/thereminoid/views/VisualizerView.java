@@ -81,8 +81,10 @@ public class VisualizerView extends View implements Runnable {
 		super.onSizeChanged(w, h, oldw, oldh);
 		y = getHeight() / 2;
 		
-		input = null;
-		input = Waves.makeSquare(10.0f, w, 0.5f);
+		Waves.initBuffer(w);
+		
+		//input = null;
+		//input = Waves.makeSquare(10.0f, w, 0.5f);
 		//input = Waves.makeSinus(5, w, 0.5f);
 	}
 
@@ -141,9 +143,18 @@ public class VisualizerView extends View implements Runnable {
 		invalidate();
 	}
 
-	public void makeWave(float[] wave)
+	public void drawWave(int waveType, float frequency, float amplitude)
 	{
-		input = null;
-		input = wave;
+		int length = this.getWidth();
+		if (length == 0)
+			return;
+		
+		//input = null;
+		if (waveType == Waves.SINUS)
+			input = Waves.makeSinus(frequency / 10.0f, amplitude);
+		else if (waveType == Waves.SQUARE)
+			input = Waves.makeSquare(frequency / 10.0f, amplitude);
+		else
+			input = Waves.makeSaw(frequency / 10.0f, amplitude);
 	}
 }
