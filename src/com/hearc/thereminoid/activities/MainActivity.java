@@ -78,6 +78,9 @@ public class MainActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
+		case R.id.action_list:
+			list();
+			return true;
 		case R.id.action_wave_sin:
 			visualizer.makeWave(Waves.makeSinus(6, visualizer.getWidth(), 0.5f));
 			return true;
@@ -98,9 +101,9 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	private void record() {
-		// TODO Auto-generated method stub
-		
+	private void list() {
+		Intent intent = new Intent(this, RecordsActivity.class);
+	    startActivity(intent);
 	}
 
 	public void mute() {
