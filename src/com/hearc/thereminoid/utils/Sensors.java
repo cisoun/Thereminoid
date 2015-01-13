@@ -32,6 +32,10 @@ public class Sensors {
 
 			@Override
 			public void onSensorChanged(SensorEvent event) {
+				calibrate(event);
+			}
+
+			private void calibrate(SensorEvent event) {
 				float x, y, z;
 
 				if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
@@ -42,7 +46,7 @@ public class Sensors {
 					// Magnetic field force formula.
 					float force = (float) Math.sqrt((x * x) + (y * y) + (z * z));
 
-					if (calibrateForce == 0)
+					if (calibrateForce == 0) // If calibrateForce = 0 --> get initial value
 						calibrateForce = force;
 
 					int value = getCalibrateValue(force, true);
@@ -51,14 +55,14 @@ public class Sensors {
 				if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
 					x = event.values[0];
 
-					if (calibrateLight == 0)
+					if (calibrateLight == 0) // If calibrateLight = 0 --> get initial value
 						calibrateLight = x;
 
 					int value = getCalibrateValue(x, false);
 					sensorsListener.onSensorChanged(Sensor.TYPE_LIGHT, value);
 				}
 			}
-
+			
 			@Override
 			public void onAccuracyChanged(Sensor sensor, int accuracy) {
 				// TODO Auto-generated method stub
@@ -66,6 +70,14 @@ public class Sensors {
 			}
 		};
 	}
+	
+	public static void resetSensors()
+	{
+		// By reseting these variables the event 'onSensorChanged' will get the initial value of the sensors at the moment
+		calibrateLight = 0;
+		calibrateForce = 0;
+	}
+
 
 	private static int getCalibrateValue(float sensorValue, boolean bool) {
 		int value;

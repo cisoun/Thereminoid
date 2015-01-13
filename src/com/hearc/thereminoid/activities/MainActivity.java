@@ -12,6 +12,7 @@ import com.hearc.thereminoid.views.VisualizerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends Activity implements ISensorsListener {
 
+	private static int orientation = 0;
 	private LinearLayout layout;
 	private VisualizerView visualizer;
 	private MenuItem menuSinus;
@@ -94,8 +96,14 @@ public class MainActivity extends Activity implements ISensorsListener {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
+		case R.id.action_mute:
+			mute();
+			return true;
 		case R.id.action_list:
-			list();
+			//list();
+			return true;
+		case R.id.action_reset:
+			resetSensors();
 			return true;
 		case R.id.action_wave_sin:
 			//visualizer.drawWave(Waves.makeSinus(6, visualizer.getWidth(), 0.5f));
@@ -131,7 +139,19 @@ public class MainActivity extends Activity implements ISensorsListener {
 	public void mute() {
 		boolean mute = Thereminoid.mute;
 		Thereminoid.mute = !mute;
-		menuMute.setIcon(mute ? R.drawable.ic_action_mute : R.drawable.ic_action_unmute);
+		menuMute.setIcon(Thereminoid.mute ? R.drawable.ic_action_mute : R.drawable.ic_action_unmute);
+	}
+	
+	private void changeOrientation()
+	{
+		if(orientation == 0){
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+			orientation = 1;
+		}
+		else{
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			orientation = 0;
+		}
 	}
 
 	private void settings() {
@@ -142,6 +162,14 @@ public class MainActivity extends Activity implements ISensorsListener {
 	public void about() {
 		Intent intent = new Intent(this, AboutActivity.class);
 		startActivity(intent);
+	}
+	
+	public void resetSensors()
+	{
+		Sensors.resetSensors();
+		
+		frequency = 0.0f;
+		amplitude = 0.5f;
 	}
 
 	@Override

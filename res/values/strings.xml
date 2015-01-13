@@ -4,6 +4,7 @@
     <string name="app_name">Thereminoid</string>
     <string name="action_record">Record</string>
     <string name="action_mute">Mute</string>
+    <string name="action_reset">Reset sensors</string>
     <string name="action_list">My records</string>
     <string name="action_wave_sin">Sinus</string>
     <string name="action_wave_sqr">Square</string>
