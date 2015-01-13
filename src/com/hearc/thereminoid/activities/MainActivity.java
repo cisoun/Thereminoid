@@ -120,6 +120,9 @@ public class MainActivity extends Activity implements ISensorsListener {
 			Thereminoid.signalType = Waves.SAW;
 			System.out.println("Main::Signal set to SAW");
 			return true;
+		case R.id.action_orientation:
+			changeOrientation();
+			return true;
 		case R.id.action_settings:
 			settings();
 			return true;
