@@ -29,6 +29,7 @@ public class VisualizerView extends View implements Runnable {
 	float[] input;
 	int y;
 	float[] hsv;
+	int waveSize;
 
 	public VisualizerView(Context context) {
 		super(context);
@@ -81,8 +82,8 @@ public class VisualizerView extends View implements Runnable {
 		super.onSizeChanged(w, h, oldw, oldh);
 		y = getHeight() / 2;
 		
-		Waves.initBuffer(w);
-		
+		//Waves.initBuffer(w);
+		waveSize = w;
 		//input = null;
 		//input = Waves.makeSquare(10.0f, w, 0.5f);
 		//input = Waves.makeSinus(5, w, 0.5f);
@@ -151,10 +152,10 @@ public class VisualizerView extends View implements Runnable {
 		
 		//input = null;
 		if (waveType == Waves.SINUS)
-			input = Waves.makeSinus(frequency / 10.0f, amplitude);
+			input = Waves.sinus(waveSize, frequency / 10.0f, amplitude);
 		else if (waveType == Waves.SQUARE)
-			input = Waves.makeSquare(frequency / 10.0f, amplitude);
+			input = Waves.square(waveSize, frequency / 10.0f, amplitude);
 		else
-			input = Waves.makeSaw(frequency / 10.0f, amplitude);
+			input = Waves.saw(waveSize, frequency / 10.0f, amplitude);
 	}
 }

@@ -4,6 +4,7 @@ import com.hearc.thereminoid.R;
 import com.hearc.thereminoid.R.id;
 import com.hearc.thereminoid.R.menu;
 import com.hearc.thereminoid.Thereminoid;
+import com.hearc.thereminoid.utils.Audio;
 import com.hearc.thereminoid.utils.ISensorsListener;
 import com.hearc.thereminoid.utils.Sensors;
 import com.hearc.thereminoid.utils.Waves;
@@ -26,7 +27,6 @@ public class MainActivity extends Activity implements ISensorsListener {
 	private MenuItem menuSinus;
 	private MenuItem menuMute;
 
-	private int waveType = Waves.SAW;
 	private float frequency = 0.0f;
 	private float amplitude = 0.5f;
 	private boolean fd = false;
@@ -67,13 +67,16 @@ public class MainActivity extends Activity implements ISensorsListener {
 		});
 		
 		threadFrequency.start();
-
+		
+		Audio.initAudio(this);
+		Audio.start();
 	}
 
 	private synchronized void redrawSignal() {
 		//System.out.println("Thereminoid::redrawSignal : " + String.valueOf(tmpFrequency));
 		
-		visualizer.drawWave(waveType, frequency, amplitude);
+		visualizer.drawWave(Thereminoid.signalType, frequency, amplitude);
+		
 		//visualizer.drawWave(Waves.makeSaw(tmpFrequency, visualizer.getWidth(), 0.5f));
 	}
 
@@ -96,17 +99,17 @@ public class MainActivity extends Activity implements ISensorsListener {
 			return true;
 		case R.id.action_wave_sin:
 			//visualizer.drawWave(Waves.makeSinus(6, visualizer.getWidth(), 0.5f));
-			waveType = Waves.SINUS;
+			Thereminoid.signalType = Waves.SINUS;
 			System.out.println("Main::Signal set to SINUS");
 			return true;
 		case R.id.action_wave_sqr:
 			//visualizer.drawWave(Waves.makeSquare(6, visualizer.getWidth(), 0.5f));
-			waveType = Waves.SQUARE;
+			Thereminoid.signalType = Waves.SQUARE;
 			System.out.println("Main::Signal set to SQUARE");
 			return true;
 		case R.id.action_wave_saw:
 			//visualizer.drawWave(Waves.makeSaw(6, visualizer.getWidth(), 0.5f));
-			waveType = Waves.SAW;
+			Thereminoid.signalType = Waves.SAW;
 			System.out.println("Main::Signal set to SAW");
 			return true;
 		case R.id.action_settings:
@@ -150,6 +153,8 @@ public class MainActivity extends Activity implements ISensorsListener {
 		} else if (sensorType == Sensor.TYPE_LIGHT) {
 			amplitude = 1.0f - (value / 100.0f);
 		}
+		
+		Audio.update(frequency, amplitude);
 	}
 
 }

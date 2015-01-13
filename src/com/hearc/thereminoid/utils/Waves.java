@@ -1,20 +1,34 @@
 package com.hearc.thereminoid.utils;
 
 public class Waves {
-	public static int SINUS = 0;
-	public static int SQUARE = 1;
-	public static int SAW = 2;
-	
-	private static int bufferSize;
-	private static float[] buffer;
-	
-	public static void initBuffer(int samples) {
-		bufferSize = samples > 0 ? samples : 1;
-		buffer = new float[samples];
-		System.out.println("INITBUFFER : " + String.valueOf(samples));
+	public final static int SINUS = 0;
+	public final static int SQUARE = 1;
+	public final static int SAW = 2;
+
+	public static float[] make(int signalType, int bufferSize, float frequency, float amplitude)
+	{
+		float buffer[];
+
+		switch (signalType) {
+		case SINUS:
+			buffer = sinus(bufferSize, frequency, amplitude);
+			break;
+		case SQUARE:
+			buffer = square(bufferSize, frequency, amplitude);
+			break;
+		case SAW:
+			buffer = saw(bufferSize, frequency, amplitude);
+			break;
+		default:
+			buffer = sinus(bufferSize, frequency, amplitude);
+			break;
+		}
+		
+		return buffer;
 	}
 	
-	public static float[] makeSinus(float frequency, float amplitude) {
+	public static float[] sinus(int bufferSize, float frequency, float amplitude) {
+		float buffer[] = new float[bufferSize];
 		float degrees = 0.0f;
 		float delta = (frequency * 360.0f) / (float) bufferSize;
 		
@@ -26,9 +40,9 @@ public class Waves {
 		return buffer;
 	}
 
-	public static float[] makeSquare(float frequency, float amplitude) {
+	public static float[] square(int bufferSize, float frequency, float amplitude) {
+		float buffer[] = new float[bufferSize];
 		int direction = -1;
-		//int samplesPerPeak = (int) (bufferSize / frequency) / 2 + 1;
 		int samplesPerPeak = (int) (bufferSize / frequency) / 2;
 		
 		for (int i = 0; i < bufferSize; i++) {
@@ -40,8 +54,8 @@ public class Waves {
 		return buffer;
 	}
 
-	public static float[] makeSaw(float frequency, float amplitude) {
-		//float[] saw = new float[samples];
+	public static float[] saw(int bufferSize, float frequency, float amplitude) {
+		float buffer[] = new float[bufferSize];
 		float samplesPerFrequence = bufferSize / frequency;
 		float offset = samplesPerFrequence / 2;
 		

@@ -1,5 +1,7 @@
 package com.hearc.thereminoid;
 
+import com.hearc.thereminoid.utils.Waves;
+
 /**
  * Thereminoid main class.<br/>
  * Contains some general stuff.
@@ -13,4 +15,5 @@ public class Thereminoid {
 	public static final float MAX_FREQUENCY = 20000.0f;
 	
 	public static boolean mute = false;
+	public static int signalType = Waves.SINUS;
 }
