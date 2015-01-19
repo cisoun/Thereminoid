@@ -1,15 +1,5 @@
 package com.hearc.thereminoid.activities;
 
-import com.hearc.thereminoid.R;
-import com.hearc.thereminoid.R.id;
-import com.hearc.thereminoid.R.menu;
-import com.hearc.thereminoid.Thereminoid;
-import com.hearc.thereminoid.utils.Audio;
-import com.hearc.thereminoid.utils.ISensorsListener;
-import com.hearc.thereminoid.utils.Sensors;
-import com.hearc.thereminoid.utils.Waves;
-import com.hearc.thereminoid.views.VisualizerView;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,21 +8,26 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import com.hearc.thereminoid.R;
+import com.hearc.thereminoid.Thereminoid;
+import com.hearc.thereminoid.utils.Audio;
+import com.hearc.thereminoid.utils.ISensorsListener;
+import com.hearc.thereminoid.utils.Sensors;
+import com.hearc.thereminoid.utils.Waves;
+import com.hearc.thereminoid.views.VisualizerView;
 
 public class MainActivity extends Activity implements ISensorsListener {
 
 	private static int orientation = 0;
 	private LinearLayout layout;
 	private VisualizerView visualizer;
-	private MenuItem menuSinus;
 	private MenuItem menuMute;
 
 	private float frequency = 0.0f;
 	private float amplitude = 0.5f;
-	private boolean fd = false;
 
 	Thread threadFrequency;
 
@@ -135,10 +130,10 @@ public class MainActivity extends Activity implements ISensorsListener {
 		}
 	}
 
-	private void list() {
+	/*private void list() {
 		Intent intent = new Intent(this, RecordsActivity.class);
 		startActivity(intent);
-	}
+	}*/
 
 	public void mute() {
 		boolean mute = Thereminoid.mute;

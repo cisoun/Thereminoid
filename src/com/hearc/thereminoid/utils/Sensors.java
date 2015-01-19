@@ -1,14 +1,10 @@
 package com.hearc.thereminoid.utils;
 
-import java.math.BigDecimal;
-
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.ParseException;
-import android.util.Log;
 
 public class Sensors {
 	private static ISensorsListener sensorsListener;

@@ -1,13 +1,11 @@
 package com.hearc.thereminoid.activities;
 
-import com.hearc.thereminoid.R;
-import com.hearc.thereminoid.R.layout;
-import com.hearc.thereminoid.R.menu;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.hearc.thereminoid.R;
 
 public class AboutActivity extends Activity {
 

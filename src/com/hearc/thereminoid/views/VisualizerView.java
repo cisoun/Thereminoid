@@ -7,7 +7,6 @@ import com.hearc.thereminoid.utils.Waves;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BlurMaskFilter;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Canvas;
 import android.graphics.Color;
