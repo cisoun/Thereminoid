@@ -17,7 +17,12 @@
         android:icon="@drawable/ic_action_list"
         android:showAsAction="always"
         android:title="@string/action_list"/>
-    <item android:id="@+id/action_reset" android:showAsAction="always" android:title="@string/action_reset" android:icon="@drawable/ic_action_reset"></item><item
+    <item
+        android:id="@+id/action_reset"
+        android:showAsAction="always"
+        android:title="@string/action_reset"
+        android:icon="@drawable/ic_action_reset"/>
+    <item
         android:id="@+id/action_wave_sin"
         android:icon="@drawable/ic_action_wave_sin"
         android:showAsAction="always"
@@ -75,6 +80,4 @@
                 android:title="@string/action_about"/>
         </menu>
     </item>
-    
-
 </menu>
