@@ -1,5 +1,15 @@
 package com.hearc.thereminoid.utils;
 
+/**
+ * Waves class
+ * 
+ * This class creates many different types of signal.
+ * These signals are defined by a frequency, an amplitude and a length. Once generated,
+ * they can be stored in an array.
+ * 
+ * @author Cyriaque Skrapits
+ *
+ */
 public class Waves {
 	public final static int SINUS = 0;
 	public final static int SQUARE = 1;
@@ -30,7 +40,7 @@ public class Waves {
 	public static float[] sinus(int bufferSize, float frequency, float amplitude) {
 		float buffer[] = new float[bufferSize];
 		float degrees = 0.0f;
-		float delta = (frequency * 360.0f) / (float) bufferSize;
+		float delta = (frequency * 360.0f) / bufferSize;
 		
 		for (int i = 0; i < bufferSize; i++) {
 			buffer[i] = (float) Math.sin(Math.toRadians(degrees)) * amplitude;
@@ -48,7 +58,7 @@ public class Waves {
 		for (int i = 0; i < bufferSize; i++) {
 			if (i % samplesPerPeak == 0)
 				direction *= -1;
-			buffer[i] = (float)direction * amplitude;
+			buffer[i] = direction * amplitude;
 		}
 
 		return buffer;
@@ -62,7 +72,7 @@ public class Waves {
 		float delta = amplitude * 2.0f / samplesPerFrequence;
 		
 		for (int i = 0; i < bufferSize; i++) {
-			buffer[i] = amplitude - (((float)i + offset) % samplesPerFrequence) * delta; //((float)i + offset % samplesPerFrequence);
+			buffer[i] = amplitude - ((i + offset) % samplesPerFrequence) * delta; //((float)i + offset % samplesPerFrequence);
 		}
 		
 		return buffer;

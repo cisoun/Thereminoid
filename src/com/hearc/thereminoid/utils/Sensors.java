@@ -1,11 +1,21 @@
 package com.hearc.thereminoid.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.preference.PreferenceManager;
 
+/**
+ * Sensors class
+ * 
+ * Sensors manager. Allows to reset and read their values.
+ * 
+ * @author Eddy Strambini
+ *
+ */
 public class Sensors {
 	private static ISensorsListener sensorsListener;
 	private static SensorManager sensorManager;
@@ -16,10 +26,14 @@ public class Sensors {
 	private static float calibrateLight = 0.0f;
 
 	public static void initSensors(Context context, ISensorsListener listener) {
+		// Check if the luminosity sensor has been chosen.
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean useLuminositySensor = settings.getBoolean("sensors_luminosity", true);
+		
 		sensorsListener = listener;
 		sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 		magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+		light = sensorManager.getDefaultSensor(useLuminositySensor ? Sensor.TYPE_LIGHT : Sensor.TYPE_PROXIMITY);
 
 		initListener();
 
@@ -27,6 +41,9 @@ public class Sensors {
 		sensorManager.registerListener(eventListener, light, SensorManager.SENSOR_DELAY_FASTEST);
 	}
 
+	/**
+	 * Starts the sensors listener.
+	 */
 	private static void initListener() {
 		eventListener = new SensorEventListener() {
 
@@ -71,9 +88,13 @@ public class Sensors {
 		};
 	}
 	
+	/**
+	 * By reseting these variables the event 'onSensorChanged' will get
+	 * the initial value of the sensors at the moment.
+	 */
 	public static void resetSensors()
 	{
-		// By reseting these variables the event 'onSensorChanged' will get the initial value of the sensors at the moment
+		// 
 		calibrateLight = 0.0f;
 		calibrateForce = 0.0f;
 	}
@@ -85,11 +106,11 @@ public class Sensors {
 		// If bool is true, magnetic sensor.
 		if (bool) {
 			// Calibrate the magnetic sensor.
-			value = (int)(103.0f - (sensorValue / calibrateForce) * 3.5f);
+			value = 103.0f - (sensorValue / calibrateForce) * 3.5f;
 
 		} else {
 			// Calibrate the light sensor.
-			value = (float)((sensorValue / calibrateLight) * 100.0f);
+			value = (sensorValue / calibrateLight) * 100.0f;
 		}
 
 		// Values must be between 0 and 100.

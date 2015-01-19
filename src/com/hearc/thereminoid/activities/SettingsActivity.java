@@ -5,6 +5,12 @@ import com.hearc.thereminoid.fragments.SettingsFragment;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+/**
+ * Settings activity
+ * 
+ * @author Cyriaque Skrapits
+ *
+ */
 public class SettingsActivity extends PreferenceActivity {
 
 	public static final String ANIMATIONS_ENABLE = "animations_enable";
@@ -18,5 +24,12 @@ public class SettingsActivity extends PreferenceActivity {
 
 		// Display the fragment as the main content.
 		getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		finish();
 	}
 }

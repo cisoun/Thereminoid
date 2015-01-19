@@ -21,7 +21,7 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/prefs_sensors" >
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="sensors_luminosity"
             android:summary="@string/prefs_sensors_luminosity_summary"
             android:title="@string/prefs_sensors_luminosity" />

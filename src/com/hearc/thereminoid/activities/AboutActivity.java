@@ -7,6 +7,12 @@ import android.view.MenuItem;
 
 import com.hearc.thereminoid.R;
 
+/**
+ * About activity
+ * 
+ * @author Cyriaque Skrapits
+ *
+ */
 public class AboutActivity extends Activity {
 
 	@Override

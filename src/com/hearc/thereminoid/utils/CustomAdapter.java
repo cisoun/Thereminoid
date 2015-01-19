@@ -4,6 +4,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+/**
+ * 
+ * @author Eddy Strambini
+ *
+ */
 public class CustomAdapter extends BaseAdapter {
 
 	@Override
