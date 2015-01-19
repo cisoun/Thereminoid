@@ -1,10 +1,14 @@
 package com.hearc.thereminoid.utils;
 
+import java.math.BigDecimal;
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.ParseException;
+import android.util.Log;
 
 public class Sensors {
 	private static ISensorsListener sensorsListener;
@@ -24,7 +28,7 @@ public class Sensors {
 		initListener();
 
 		sensorManager.registerListener(eventListener, magnetic, SensorManager.SENSOR_DELAY_GAME);
-		sensorManager.registerListener(eventListener, light, SensorManager.SENSOR_DELAY_UI);
+		sensorManager.registerListener(eventListener, light, SensorManager.SENSOR_DELAY_FASTEST);
 	}
 
 	private static void initListener() {
@@ -46,19 +50,19 @@ public class Sensors {
 					// Magnetic field force formula.
 					float force = (float) Math.sqrt((x * x) + (y * y) + (z * z));
 
-					if (calibrateForce == 0) // If calibrateForce = 0 --> get initial value
+					if (calibrateForce == 0.0f) // If calibrateForce = 0 --> get initial value
 						calibrateForce = force;
 
-					int value = getCalibrateValue(force, true);
+					float value = getCalibrateValue(force, true);
 					sensorsListener.onSensorChanged(Sensor.TYPE_MAGNETIC_FIELD, value);
 				}
 				if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
 					x = event.values[0];
 
-					if (calibrateLight == 0) // If calibrateLight = 0 --> get initial value
+					if (calibrateLight == 0.0f) // If calibrateLight = 0 --> get initial value
 						calibrateLight = x;
 
-					int value = getCalibrateValue(x, false);
+					float value = getCalibrateValue(x, false);
 					sensorsListener.onSensorChanged(Sensor.TYPE_LIGHT, value);
 				}
 			}
@@ -74,28 +78,29 @@ public class Sensors {
 	public static void resetSensors()
 	{
 		// By reseting these variables the event 'onSensorChanged' will get the initial value of the sensors at the moment
-		calibrateLight = 0;
-		calibrateForce = 0;
+		calibrateLight = 0.0f;
+		calibrateForce = 0.0f;
 	}
 
 
-	private static int getCalibrateValue(float sensorValue, boolean bool) {
-		int value;
+	private static float getCalibrateValue(float sensorValue, boolean bool) {
+		float value;
 
 		// If bool is true, magnetic sensor.
 		if (bool) {
 			// Calibrate the magnetic sensor.
-			value = (int) (103 - (sensorValue / calibrateForce) * 3.5);
+			value = (int)(103.0f - (sensorValue / calibrateForce) * 3.5f);
+
 		} else {
 			// Calibrate the light sensor.
-			value = (int) ((sensorValue / calibrateLight) * 100);
+			value = (float)((sensorValue / calibrateLight) * 100.0f);
 		}
 
 		// Values must be between 0 and 100.
-		if (value > 100)
-			return 100;
-		if (value <= 0)
-			return 0;
+		if (value > 100.0f)
+			return 100.0f;
+		if (value <= 0.0f)
+			return 0.0f;
 		else
 			return value;
 	}

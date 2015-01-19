@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -142,7 +143,7 @@ public class MainActivity extends Activity implements ISensorsListener {
 	public void mute() {
 		boolean mute = Thereminoid.mute;
 		Thereminoid.mute = !mute;
-		menuMute.setIcon(Thereminoid.mute ? R.drawable.ic_action_mute : R.drawable.ic_action_unmute);
+		menuMute.setIcon(mute ? R.drawable.ic_action_mute : R.drawable.ic_action_unmute);
 	}
 	
 	private void changeOrientation()
@@ -180,12 +181,23 @@ public class MainActivity extends Activity implements ISensorsListener {
 
 		if (sensorType == Sensor.TYPE_MAGNETIC_FIELD) {
 			frequency = 1000.0f - (10.0f * value);
+			
+			if(frequency == 0.0f)
+				frequency = 10.0f; // Set to 10.0f to avoid the frequency 0 when we approach the magnet.
+			
+			Log.d("frequency", Float.toString(frequency));
 			//System.out.println("Thereminoid::onSensorChanged : " + String.valueOf(value));
 		} else if (sensorType == Sensor.TYPE_LIGHT) {
 			amplitude = 1.0f - (value / 100.0f);
 		}
+		if(!Thereminoid.mute){
+			frequency = 0.0f;
+			amplitude = 0.0f;
+		}
 		
 		Audio.update(frequency, amplitude);
+
+			
 	}
 
 }
